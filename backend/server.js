@@ -120,37 +120,43 @@ function startSimulator() {
   }
 }
 
-// Start Server & Self-Initialize if database is empty
-server.listen(config.PORT, async () => {
-  console.log(`================================================================`);
-  console.log(`🚀 SIH26040 Water Dashboard Backend running on port ${config.PORT}`);
-  console.log(`📡 ESP32 Endpoint: POST http://localhost:${config.PORT}/api/water-data`);
-  console.log(`🌐 Latest Data API: GET http://localhost:${config.PORT}/api/water-data/latest`);
-  console.log(`📊 History API: GET http://localhost:${config.PORT}/api/water-data/history`);
-  console.log(`⚡ WebSocket: ws://localhost:${config.PORT}/ws`);
-  console.log(`================================================================`);
+// Start Server & Self-Initialize if database is empty (Standalone mode)
+if (!process.env.VERCEL) {
+  server.listen(config.PORT, async () => {
+    console.log(`================================================================`);
+    console.log(`🚀 SIH26040 Water Dashboard Backend running on port ${config.PORT}`);
+    console.log(`📡 ESP32 Endpoint: POST http://localhost:${config.PORT}/api/water-data`);
+    console.log(`🌐 Latest Data API: GET http://localhost:${config.PORT}/api/water-data/latest`);
+    console.log(`📊 History API: GET http://localhost:${config.PORT}/api/water-data/history`);
+    console.log(`⚡ WebSocket: ws://localhost:${config.PORT}/ws`);
+    console.log(`================================================================`);
 
-  // Connect to MongoDB Atlas
-  await connectMongoDB();
+    // Connect to MongoDB Atlas
+    await connectMongoDB();
 
-  try {
-    // Check if SQLite units table is populated
-    const unitCount = await dbAsync.get(`SELECT count(*) as count FROM sqlite_master WHERE type='table' AND name='units'`);
-    if (!unitCount || unitCount.count === 0) {
-      console.log('⚡ Initializing and seeding database schema...');
-      await seedDatabase();
-    } else {
-      const units = await dbAsync.all(`SELECT count(*) as count FROM units`);
-      if (units[0].count === 0) {
+    try {
+      // Check if SQLite units table is populated
+      const unitCount = await dbAsync.get(`SELECT count(*) as count FROM sqlite_master WHERE type='table' AND name='units'`);
+      if (!unitCount || unitCount.count === 0) {
+        console.log('⚡ Initializing and seeding database schema...');
         await seedDatabase();
+      } else {
+        const units = await dbAsync.all(`SELECT count(*) as count FROM units`);
+        if (units[0].count === 0) {
+          await seedDatabase();
+        }
       }
+    } catch (err) {
+      console.log('⚡ Running initial database seed...');
+      await seedDatabase();
     }
-  } catch (err) {
-    console.log('⚡ Running initial database seed...');
-    await seedDatabase();
-  }
 
-  startSimulator();
-});
+    startSimulator();
+  });
+} else {
+  // Running in Vercel Serverless Lambda
+  connectMongoDB();
+}
 
-module.exports = { app, server };
+module.exports = app;
+
