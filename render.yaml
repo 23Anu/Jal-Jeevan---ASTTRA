@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: astra-water-backend
+    env: node
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 5000
+      - key: SIMULATOR_INTERVAL_MS
+        value: 10000
+      - key: ENABLE_AUTO_SIMULATOR
+        value: "true"
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
