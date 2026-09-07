@@ -3,16 +3,31 @@ const fs = require('fs');
 const path = require('path');
 const config = require('../config/keys');
 
-const dbDir = path.dirname(config.DB_FILE);
-if (!fs.existsSync(dbDir)) {
-  fs.mkdirSync(dbDir, { recursive: true });
+let dbPath = config.DB_FILE;
+if (process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME) {
+  const tmpDb = path.join('/tmp', 'water_monitoring.sqlite');
+  try {
+    if (!fs.existsSync(tmpDb) && fs.existsSync(config.DB_FILE)) {
+      fs.copyFileSync(config.DB_FILE, tmpDb);
+    }
+    dbPath = tmpDb;
+  } catch (e) {
+    dbPath = tmpDb;
+  }
 }
 
-const db = new sqlite3.Database(config.DB_FILE, (err) => {
+const dbDir = path.dirname(dbPath);
+if (!fs.existsSync(dbDir)) {
+  try {
+    fs.mkdirSync(dbDir, { recursive: true });
+  } catch (e) {}
+}
+
+const db = new sqlite3.Database(dbPath, (err) => {
   if (err) {
     console.error('❌ Failed to connect to SQLite database:', err.message);
   } else {
-    console.log(`✅ SQLite Database connected at: ${config.DB_FILE}`);
+    console.log(`✅ SQLite Database connected at: ${dbPath}`);
   }
 });
 

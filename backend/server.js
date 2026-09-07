@@ -68,6 +68,39 @@ readingsRouter.setWebSocketBroadcaster(broadcast);
 app.use(cors({ origin: '*' }));
 app.use(express.json());
 
+// Ensure Database is initialized on Serverless cold starts
+let isDbInitialized = false;
+async function ensureDatabaseReady() {
+  if (isDbInitialized) return;
+  try {
+    const unitCount = await dbAsync.get(`SELECT count(*) as count FROM sqlite_master WHERE type='table' AND name='units'`);
+    if (!unitCount || unitCount.count === 0) {
+      console.log('⚡ Initializing and seeding database schema...');
+      await seedDatabase();
+    } else {
+      const units = await dbAsync.all(`SELECT count(*) as count FROM units`);
+      if (units[0].count === 0) {
+        await seedDatabase();
+      }
+    }
+  } catch (err) {
+    console.log('⚡ Running initial database seed...');
+    try {
+      await seedDatabase();
+    } catch (e) {
+      console.error('Seed error:', e);
+    }
+  }
+  isDbInitialized = true;
+}
+
+app.use(async (req, res, next) => {
+  if (!isDbInitialized && req.path.startsWith('/api') && req.path !== '/api/health') {
+    await ensureDatabaseReady();
+  }
+  next();
+});
+
 // API Routes
 app.use('/api/water-data', waterDataRouter); // ESP32 IoT endpoint & MongoDB Atlas
 app.use('/api/units', unitsRouter);
