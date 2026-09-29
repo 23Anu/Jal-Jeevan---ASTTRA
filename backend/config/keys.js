@@ -5,7 +5,7 @@ module.exports = {
   PORT: process.env.PORT || 5000,
   NODE_ENV: process.env.NODE_ENV || 'development',
   MONGODB_URI: process.env.MONGODB_URI || '',
-  JWT_SECRET: process.env.JWT_SECRET || 'astra_sih26040_jharkhand_water_secret_key_2026',
+  JWT_SECRET: process.env.JWT_SECRET || 'asttra_sih26040_jharkhand_water_secret_key_2026',
   JWT_EXPIRES_IN: process.env.JWT_EXPIRES_IN || '7d',
   DB_FILE: path.resolve(__dirname, '..', process.env.DB_FILE || './db/water_monitoring.sqlite'),
   SIMULATOR_INTERVAL_MS: parseInt(process.env.SIMULATOR_INTERVAL_MS || '10000', 10),

@@ -206,7 +206,7 @@ void setup() {
   delay(1000);
 
   Serial.println("\n========================================================");
-  Serial.println("🚀 ASTRA Water Purification & Quality Monitoring IoT Node");
+  Serial.println("🚀 ASTTRA Water Purification & Quality Monitoring IoT Node");
   Serial.println("📍 Device ID: " + String(DEVICE_ID));
   Serial.println("========================================================");
 

@@ -39,7 +39,7 @@ export default function Header({ isWsConnected = true }) {
             </div>
             <div className="brand-titles">
               <div className="brand-title-main">
-                <span>ASTRA Jal-Jeevan</span>
+                <span>ASTTRA Jal-Jeevan</span>
                 <span style={{ 
                   fontSize: '0.68rem', 
                   background: 'var(--bg-subtle)', 

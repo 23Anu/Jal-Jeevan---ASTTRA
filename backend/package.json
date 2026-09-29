@@ -1,5 +1,5 @@
 {
-  "name": "astra-water-backend",
+  "name": "asttra-water-backend",
   "version": "1.0.0",
   "description": "Smart Water Purification & Quality Monitoring Backend (Govt. of Jharkhand - SIH26040)",
   "main": "server.js",

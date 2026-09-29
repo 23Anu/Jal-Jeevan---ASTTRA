@@ -1017,11 +1017,11 @@ const translations = {
 const LanguageContext = createContext();
 
 export function LanguageProvider({ children }) {
-  const [lang, setLang] = useState(() => localStorage.getItem('astra_lang') || 'en');
+  const [lang, setLang] = useState(() => localStorage.getItem('asttra_lang') || localStorage.getItem('astra_lang') || 'en');
 
   const changeLanguage = (newLang) => {
     setLang(newLang);
-    localStorage.setItem('astra_lang', newLang);
+    localStorage.setItem('asttra_lang', newLang);
   };
 
   const toggleLanguage = () => {

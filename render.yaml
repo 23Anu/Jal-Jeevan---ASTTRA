@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: astra-water-backend
+    name: asttra-water-backend
     env: node
     rootDir: backend
     buildCommand: npm install

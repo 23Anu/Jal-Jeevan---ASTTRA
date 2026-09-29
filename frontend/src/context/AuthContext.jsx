@@ -49,11 +49,11 @@ export const DEMO_ROLES = DEMO_OFFICERS;
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(() => {
-    const saved = localStorage.getItem('astra_user');
+    const saved = localStorage.getItem('asttra_user') || localStorage.getItem('astra_user');
     return saved ? JSON.parse(saved) : null;
   });
 
-  const [token, setToken] = useState(() => localStorage.getItem('astra_token') || null);
+  const [token, setToken] = useState(() => localStorage.getItem('asttra_token') || localStorage.getItem('astra_token') || null);
   const [officersList, setOfficersList] = useState(DEMO_OFFICERS);
 
   // Fetch live officers from backend on mount
@@ -110,8 +110,8 @@ export function AuthProvider({ children }) {
       if (data.success) {
         setUser(data.user);
         setToken(data.token);
-        localStorage.setItem('astra_user', JSON.stringify(data.user));
-        localStorage.setItem('astra_token', data.token);
+        localStorage.setItem('asttra_user', JSON.stringify(data.user));
+        localStorage.setItem('asttra_token', data.token);
         return { success: true, user: data.user };
       } else {
         return { success: false, error: data.error };
@@ -136,7 +136,7 @@ export function AuthProvider({ children }) {
           phone: found.phone
         };
         setUser(fallbackUser);
-        localStorage.setItem('astra_user', JSON.stringify(fallbackUser));
+        localStorage.setItem('asttra_user', JSON.stringify(fallbackUser));
         return { success: true, user: fallbackUser };
       }
       return { success: false, error: 'Network error or invalid OTP' };
@@ -155,8 +155,8 @@ export function AuthProvider({ children }) {
       if (data.success) {
         setUser(data.user);
         setToken(data.token);
-        localStorage.setItem('astra_user', JSON.stringify(data.user));
-        localStorage.setItem('astra_token', data.token);
+        localStorage.setItem('asttra_user', JSON.stringify(data.user));
+        localStorage.setItem('asttra_token', data.token);
         return { success: true, user: data.user };
       } else {
         return { success: false, error: data.error };
@@ -170,6 +170,8 @@ export function AuthProvider({ children }) {
   const logout = () => {
     setUser(null);
     setToken(null);
+    localStorage.removeItem('asttra_user');
+    localStorage.removeItem('asttra_token');
     localStorage.removeItem('astra_user');
     localStorage.removeItem('astra_token');
   };

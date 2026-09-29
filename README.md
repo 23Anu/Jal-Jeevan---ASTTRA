@@ -1,15 +1,15 @@
-# Jal-Jeevan - ASTRA: Smart Water Purification & IoT Quality Monitoring Dashboard
+# Jal-Jeevan - ASTTRA: Smart Water Purification & IoT Quality Monitoring Dashboard
 ### Department of Drinking Water & Sanitation • Government of Jharkhand
 ### Smart India Hackathon (SIH 2026) • Problem Statement: SIH26040
 
-Official full-stack IoT telemetry web application and automated water quality monitoring system for rural and mining-affected regions, enabling real-time water quality monitoring, automated purification, alerts, and data-driven insights.
+Official full-stack IoT telemetry web application developed for **Smart India Hackathon (SIH 2026)** problem statement **SIH26040** (Hardware / Sustainable Energy & Water Purification).
 
 ---
 
 ## 🏗️ Architecture & Directory Structure
 
 ```
-d:\ASTRA - SIH\
+ASTTRA - SIH/
 ├── backend/
 │   ├── config/              # Environment variables, ports, API secrets (.env, keys.js)
 │   ├── db/                  # SQLite database engine, schema migrations, seeders
@@ -80,4 +80,4 @@ npm run dev      # Starts Vite dev server on http://localhost:3000
 2. **BIS 10500 Compliance Engine**: Automatically verifies every ESP32 sensor reading against Indian Drinking Water specifications.
 3. **Predictive Drift Analyzer**: Generates amber predictive warnings when TDS/turbidity trends indicate impending filter membrane exhaustion.
 4. **Bilingual Support**: Instant toggle between English and Hindi (हिन्दी) across all views.
-5. **Cost & Sustainability Analytics**: Compares ASTRA solar purification (~₹0.08/L) against conventional RO kiosks (~₹0.35/L) and calculates total water saved via zero-reject recirculation.
+5. **Cost & Sustainability Analytics**: Compares ASTTRA solar purification (~₹0.08/L) against conventional RO kiosks (~₹0.35/L) and calculates total water saved via zero-reject recirculation.

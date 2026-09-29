@@ -1038,7 +1038,7 @@ export default function PhedPortal({ units = [], activeUnitId, onSelectUnit, onR
           
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '16px' }}>
             <div className="card" style={{ borderLeft: '4px solid var(--safe)' }}>
-              <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', fontWeight: 700 }}>ASTRA Production Cost</div>
+              <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', fontWeight: 700 }}>ASTTRA Production Cost</div>
               <div style={{ fontSize: '2.2rem', fontWeight: 800, color: 'var(--safe)', marginTop: 4 }}>
                 ₹0.08 <span style={{ fontSize: '0.9rem', fontWeight: 600 }}>/ L</span>
               </div>

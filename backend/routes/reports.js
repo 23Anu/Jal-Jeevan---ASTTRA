@@ -43,9 +43,10 @@ router.get('/analytics', async (req, res) => {
     const syncSuccessRate = totalReadings > 0 ? Number(((liveReadings + bufferedReadings) / totalReadings * 100).toFixed(1)) : 99.4;
 
     // Operational Cost Benchmark vs Conventional RO (PRD Requirement)
-    // ASTRA System: ~₹0.08 / Litre (Solar + Recirculation Nano-membrane)
+    // ASTTRA System: ~₹0.08 / Litre (Solar + Recirculation Nano-membrane)
     // Commercial RO Kiosk: ~₹0.35 / Litre (40% reject water waste + grid electricity)
     const costBenchmark = {
+      asttraCostPerLitre: 0.08,
       astraCostPerLitre: 0.08,
       commercialRoCostPerLitre: 0.35,
       waterSavedLitres: Math.round(totalPurifiedToday * 0.42), // 42% water recovery advantage over conventional RO reject

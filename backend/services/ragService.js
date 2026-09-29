@@ -227,12 +227,12 @@ async function processWaterRagQuery(queryText, requestedLang = 'en') {
         `1. **TDS (कुल घुलित ठोस):** अधिकतम 500 mg/L (ppm) तक सुरक्षित माना जाता है। 500 से ऊपर पानी भारी व दूषित हो सकता है।\n` +
         `2. **pH मान:** 6.5 से 8.5 के बीच संतुलित होना चाहिए।\n` +
         `3. **गंदलापन (Turbidity):** 1.0 NTU से कम होना आवश्यक है (शीशे जैसा साफ़ पानी)।\n` +
-        `4. **सौर पुनर्चक्रण:** ASTRA प्रणाली बिना किसी वेस्ट वाटर रिजेक्ट के पानी को पुनः शोधित करती है।`
+        `4. **सौर पुनर्चक्रण:** ASTTRA प्रणाली बिना किसी वेस्ट वाटर रिजेक्ट के पानी को पुनः शोधित करती है।`
       : `📘 **Bureau of Indian Standards (BIS 10500:2012) Guidelines:**\n\n` +
         `1. **TDS (Total Dissolved Solids):** Safe threshold is ≤ 500 mg/L (ppm). Above 500 indicates high mineral scaling.\n` +
         `2. **pH Balance:** Permissible potable range is 6.5 to 8.5.\n` +
         `3. **Turbidity:** Must be ≤ 1.0 NTU for crystal clear pathogen-free water.\n` +
-        `4. **Solar Recirculation:** ASTRA technology purifies water with zero-reject wastewater runoff.`;
+        `4. **Solar Recirculation:** ASTTRA technology purifies water with zero-reject wastewater runoff.`;
 
     const sourceLabel = isHindi
       ? 'भारतीय मानक ब्यूरो (BIS 10500:2012 पेयजल विनिर्देश)'
